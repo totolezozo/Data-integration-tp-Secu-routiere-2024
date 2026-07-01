@@ -1,0 +1,11 @@
+step,table,rows_affected,note
+standardize_datetime,caracteristiques,54402,combined jour/mois/an/hrmn into one datetime column
+standardize_coordinates,caracteristiques,54402,comma-decimal string to float (WGS84)
+fix_coordinate_swap,caracteristiques,7,"lat/long swapped, rows outside their territory bbox where swapping fixes it"
+null_unresolvable_coordinates,caracteristiques,3,"outside bbox and swap does not fix it, nulled rather than guessed"
+dedup_lieux_to_one_per_accident,lieux,15846,"kept first row per Num_Acc, multi-road intersections collapse to their first-listed road"
+null_implausible_vma,lieux,20,vma > 130 km/h treated as a keying error
+standardize_catv_zero_padding,vehicules,92678,"cast catv to int so ""7"" and ""07"" are the same value everywhere downstream"
+flag_hit_and_run_placeholders,usagers,2395,"sexe/an_nais left null and flagged, not imputed"
+flag_seat_conflicts,usagers,1459,"ambiguous (Num_Acc, id_vehicule, place) for non-pedestrians, flagged not deduped"
+enrich_severity_index_and_time_of_day,caracteristiques,125187,"severity_index/accident_severity_class from usagers, time_of_day from hrmn"
